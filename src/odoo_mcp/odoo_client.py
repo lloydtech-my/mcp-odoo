@@ -88,26 +88,22 @@ class OdooClient:
 
         # Xác thực và lấy user ID
         print(
-            f"Authenticating with database: {
-                self.db}, username: {self.username}",
+            f"Authenticating with database: {self.db}, username: {self.username}",
             file=os.sys.stderr,
         )
         try:
             print(
-                f"Making request to {
-                    self.hostname}/xmlrpc/2/common (attempt 1)",
+                f"Making request to {self.hostname}/xmlrpc/2/common (attempt 1)",
                 file=os.sys.stderr,
             )
             self.uid = self._common.authenticate(
                 self.db, self.username, self.password, {}
             )
             if not self.uid:
-                raise ValueError(
-                    "Authentication failed: Invalid username or password")
+                raise ValueError("Authentication failed: Invalid username or password")
         except (socket.error, socket.timeout, ConnectionError, TimeoutError) as e:
             print(f"Connection error: {str(e)}", file=os.sys.stderr)
-            raise ConnectionError(
-                f"Failed to connect to Odoo server: {str(e)}")
+            raise ConnectionError(f"Failed to connect to Odoo server: {str(e)}")
         except Exception as e:
             print(f"Authentication error: {str(e)}", file=os.sys.stderr)
             raise ValueError(f"Failed to authenticate with Odoo: {str(e)}")
@@ -161,8 +157,7 @@ class OdooClient:
 
             # Then read the model data with only the most basic fields
             # that are guaranteed to exist in all Odoo versions
-            result = self._execute(
-                "ir.model", "read", model_ids, ["model", "name"])
+            result = self._execute("ir.model", "read", model_ids, ["model", "name"])
 
             # Extract and sort model names alphabetically
             models = sorted([rec["model"] for rec in result])
@@ -337,11 +332,9 @@ class RedirectTransport(xmlrpc.client.Transport):
                 )
             else:
                 if self.use_https:
-                    connection = http.client.HTTPSConnection(
-                        host, timeout=self.timeout)
+                    connection = http.client.HTTPSConnection(host, timeout=self.timeout)
                 else:
-                    connection = http.client.HTTPConnection(
-                        host, timeout=self.timeout)
+                    connection = http.client.HTTPConnection(host, timeout=self.timeout)
 
         return connection
 
@@ -370,8 +363,7 @@ class RedirectTransport(xmlrpc.client.Transport):
                 print(f"Error during request: {str(e)}", file=os.sys.stderr)
                 raise
 
-        raise xmlrpc.client.ProtocolError(
-            host + handler, 310, "Too many redirects", {})
+        raise xmlrpc.client.ProtocolError(host + handler, 310, "Too many redirects", {})
 
 
 def load_config():
@@ -425,8 +417,7 @@ def get_odoo_client():
     timeout = int(
         os.environ.get("ODOO_TIMEOUT", "30")
     )  # Increase default timeout to 30 seconds
-    verify_ssl = os.environ.get("ODOO_VERIFY_SSL", "1").lower() in [
-        "1", "true", "yes"]
+    verify_ssl = os.environ.get("ODOO_VERIFY_SSL", "1").lower() in ["1", "true", "yes"]
 
     # Print detailed configuration
     print("Odoo client configuration:", file=os.sys.stderr)

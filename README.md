@@ -13,45 +13,6 @@ An MCP server implementation that integrates with Odoo ERP systems, enabling AI 
 
 ## Tools
 
-* **search_records**
-  * Search for records in any Odoo model
-  * Inputs:
-    * `model` (string): The model name (e.g., 'res.partner')
-    * `domain` (array): Search domain (e.g., [['is_company', '=', true]])
-    * `fields` (optional array): Optional fields to fetch
-    * `limit` (optional number): Maximum number of records to return
-  * Returns: Matching records with requested fields
-
-* **read_record**
-  * Read details of a specific record
-  * Inputs:
-    * `model` (string): The model name (e.g., 'res.partner')
-    * `id` (number): The record ID
-    * `fields` (optional array): Optional fields to fetch
-  * Returns: Record data with requested fields
-
-* **create_record**
-  * Create a new record in Odoo
-  * Inputs:
-    * `model` (string): The model name (e.g., 'res.partner')
-    * `values` (object): Dictionary of field values
-  * Returns: Dictionary with the new record ID
-
-* **update_record**
-  * Update an existing record
-  * Inputs:
-    * `model` (string): The model name (e.g., 'res.partner')
-    * `id` (number): The record ID
-    * `values` (object): Dictionary of field values to update
-  * Returns: Dictionary indicating success
-
-* **delete_record**
-  * Delete a record from Odoo
-  * Inputs:
-    * `model` (string): The model name (e.g., 'res.partner')
-    * `id` (number): The record ID
-  * Returns: Dictionary indicating success
-
 * **execute_method**
   * Execute a custom method on an Odoo model
   * Inputs:
@@ -59,28 +20,22 @@ An MCP server implementation that integrates with Odoo ERP systems, enabling AI 
     * `method` (string): Method name to execute
     * `args` (optional array): Positional arguments
     * `kwargs` (optional object): Keyword arguments
-  * Returns: Dictionary with the method result
-
-* **get_model_fields**
-  * Get field definitions for a model
-  * Inputs:
-    * `model` (string): The model name (e.g., 'res.partner')
-  * Returns: Dictionary with field definitions
+  * Returns: Dictionary with the method result and success indicator
 
 * **search_employee**
-  * Search for employees by name.
+  * Search for employees by name
   * Inputs:
-    * `name` (string): The name (or part of the name) to search for.
-    * `limit` (optional number): The maximum number of results to return (default 20).
-  * Returns: List of matching employee names and IDs.
+    * `name` (string): The name (or part of the name) to search for
+    * `limit` (optional number): The maximum number of results to return (default 20)
+  * Returns: Object containing success indicator, list of matching employee names and IDs, and any error message
 
 * **search_holidays**
-  * Searches for holidays within a specified date range.
+  * Searches for holidays within a specified date range
   * Inputs:
-    * `start_date` (string): Start date in YYYY-MM-DD format.
-    * `end_date` (string): End date in YYYY-MM-DD format.
-    * `employee_id` (optional number): Optional employee ID to filter holidays.
-  * Returns: List of holidays found.
+    * `start_date` (string): Start date in YYYY-MM-DD format
+    * `end_date` (string): End date in YYYY-MM-DD format
+    * `employee_id` (optional number): Optional employee ID to filter holidays
+  * Returns: Object containing success indicator, list of holidays found, and any error message
 
 ## Resources
 
